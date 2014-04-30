@@ -28,7 +28,7 @@ document.body.addEventListener('click', function(e) {
   while (elem && elem.tagName != 'A') {
     elem = elem.parentNode;
   }
-  if (elem && elem.tagName == 'A' && typeof elem.href == 'string' && elem.href.startsWith('bitcoin:')) {
+  if (elem && elem.tagName == 'A' && typeof elem.href == 'string' && elem.href.indexOf('bitcoin:') == 0) {
     chrome.runtime.sendMessage({ type: 'newTab', url: uri + encodeURIComponent(elem.href) });
     e.preventDefault();
   }
