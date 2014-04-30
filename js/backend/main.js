@@ -136,6 +136,12 @@ var addListener = function(callback) {
     chrome.runtime.onMessage.addListener(callback);
 };
 
+// TODO: Maybe we shoud move it to another place?
+addListener(function(data) {
+  if (data.type == 'newTab') {
+    chrome.tabs.create({url: data.url});
+  }
+});
 
 /***************************************
 /* Service instance that will be running in the background page

@@ -32,9 +32,10 @@ function (controllers, Port, DarkWallet, BtcUtils, CurrencyFormat) {
     if (!pars) {
       notify.warning('URI not supported');
     } else {
-      if ($scope.settings.currency === 'mBTC') {
+      if (DarkWallet.getIdentity().settings.currency === 'mBTC') {
+        // TODO: Use CurrencyFormat here
         pars.amount *= 1000;
-      } 
+      }
       sendForm.title = pars.message ? decodeURIComponent(pars.message) : '';
       sendForm.recipients.fields[recipient].address = pars.address;
       sendForm.recipients.fields[recipient].amount = pars.amount;
@@ -108,8 +109,6 @@ function (controllers, Port, DarkWallet, BtcUtils, CurrencyFormat) {
       }
   };
 
-  initIdentity(DarkWallet.getIdentity());
-  
   // Identity ready
   Port.connectNg('wallet', $scope, function(data) {
     if (data.type == 'ready') {
